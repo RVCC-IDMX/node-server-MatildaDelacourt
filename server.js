@@ -15,13 +15,14 @@ server.listen(PORT, HOSTNAME, () => {
 //console.log(__filename);
 //console.log(__dirname);
 
-const { readFile, readFileSync } = require('fs');
+const { appendFile } = require('fs');
 
-try {
-  const data = readFileSync('hi.txt', 'utf8');
-  console.log(data);
-} catch (err) {
-  console.error(err);
-}
+const newContent = '\n This is some more new text';
 
-console.log('Log from outside');
+appendFile('hi.txt', newContent, (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log('Content written!');
+});
